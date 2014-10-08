@@ -127,11 +127,11 @@ AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
-am_osdemo16_OBJECTS = osdemo.$(OBJEXT)
+am_osdemo16_OBJECTS = osdemo16.$(OBJEXT)
 osdemo16_OBJECTS = $(am_osdemo16_OBJECTS)
 osdemo16_DEPENDENCIES = $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	../util/libutil.la
-am_osdemo32_OBJECTS = osdemo.$(OBJEXT)
+am_osdemo32_OBJECTS = osdemo32.$(OBJEXT)
 osdemo32_OBJECTS = $(am_osdemo32_OBJECTS)
 osdemo32_DEPENDENCIES = $(am__DEPENDENCIES_1) ../util/libutil.la
 AM_V_P = $(am__v_P_@AM_V@)
@@ -355,8 +355,8 @@ AM_CFLAGS = \
 	$(OSMESA_CFLAGS) \
 	-I$(top_srcdir)/src/util
 
-osdemo16_SOURCES = osdemo.c
-osdemo32_SOURCES = osdemo.c
+osdemo16_SOURCES = osdemo16.c
+osdemo32_SOURCES = osdemo32.c
 osdemo_LDADD = $(OSMESA_LIBS) ../util/libutil.la
 osdemo16_LDADD = $(OSMESA_LIBS) $(OSMESA16_LIBS) ../util/libutil.la
 osdemo32_LDADD = $(OSMESA32_LIBS) ../util/libutil.la
@@ -463,6 +463,8 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/osdemo.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/osdemo16.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/osdemo32.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

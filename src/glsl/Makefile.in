@@ -111,12 +111,13 @@ host_triplet = @host@
 @HAVE_GLUT_TRUE@	geom-outlining-150$(EXEEXT) \
 @HAVE_GLUT_TRUE@	geom-sprites$(EXEEXT) \
 @HAVE_GLUT_TRUE@	geom-stipple-lines$(EXEEXT) \
-@HAVE_GLUT_TRUE@	geom-wide-lines$(EXEEXT) identity$(EXEEXT) \
-@HAVE_GLUT_TRUE@	linktest$(EXEEXT) mandelbrot$(EXEEXT) \
-@HAVE_GLUT_TRUE@	multinoise$(EXEEXT) multitex$(EXEEXT) \
-@HAVE_GLUT_TRUE@	noise2$(EXEEXT) noise$(EXEEXT) \
-@HAVE_GLUT_TRUE@	pointcoord$(EXEEXT) points$(EXEEXT) \
-@HAVE_GLUT_TRUE@	samplers$(EXEEXT) samplers_array$(EXEEXT) \
+@HAVE_GLUT_TRUE@	geom-wide-lines$(EXEEXT) gsraytrace$(EXEEXT) \
+@HAVE_GLUT_TRUE@	identity$(EXEEXT) linktest$(EXEEXT) \
+@HAVE_GLUT_TRUE@	mandelbrot$(EXEEXT) multinoise$(EXEEXT) \
+@HAVE_GLUT_TRUE@	multitex$(EXEEXT) noise2$(EXEEXT) \
+@HAVE_GLUT_TRUE@	noise$(EXEEXT) pointcoord$(EXEEXT) \
+@HAVE_GLUT_TRUE@	points$(EXEEXT) samplers$(EXEEXT) \
+@HAVE_GLUT_TRUE@	samplers_array$(EXEEXT) \
 @HAVE_GLUT_TRUE@	shadow_sampler$(EXEEXT) shtest$(EXEEXT) \
 @HAVE_GLUT_TRUE@	simplex-noise$(EXEEXT) skinning$(EXEEXT) \
 @HAVE_GLUT_TRUE@	texaaline$(EXEEXT) texdemo1$(EXEEXT) \
@@ -187,6 +188,9 @@ geom_stipple_lines_DEPENDENCIES = ../util/libutil.la
 geom_wide_lines_SOURCES = geom-wide-lines.c
 geom_wide_lines_OBJECTS = geom-wide-lines.$(OBJEXT)
 geom_wide_lines_DEPENDENCIES = ../util/libutil.la
+am_gsraytrace_OBJECTS = gsraytrace.$(OBJEXT)
+gsraytrace_OBJECTS = $(am_gsraytrace_OBJECTS)
+gsraytrace_DEPENDENCIES = ../util/libutil.la
 identity_SOURCES = identity.c
 identity_OBJECTS = identity.$(OBJEXT)
 identity_DEPENDENCIES = ../util/libutil.la
@@ -294,24 +298,44 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+LTCXXCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) \
+	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
+	$(AM_CXXFLAGS) $(CXXFLAGS)
+AM_V_CXX = $(am__v_CXX_@AM_V@)
+am__v_CXX_ = $(am__v_CXX_@AM_DEFAULT_V@)
+am__v_CXX_0 = @echo "  CXX     " $@;
+am__v_CXX_1 = 
+CXXLD = $(CXX)
+CXXLINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
+	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
+am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
+am__v_CXXLD_0 = @echo "  CXXLD   " $@;
+am__v_CXXLD_1 = 
 SOURCES = array.c bezier.c bitmap.c blinking-teapot.c brick.c bump.c \
 	convolutions.c deriv.c fragcoord.c fsraytrace.c \
 	geom-outlining-130.c geom-outlining-150.c geom-sprites.c \
-	geom-stipple-lines.c geom-wide-lines.c identity.c linktest.c \
-	mandelbrot.c multinoise.c multitex.c noise.c noise2.c \
-	pointcoord.c points.c samplers.c $(samplers_array_SOURCES) \
-	shadow_sampler.c shtest.c simplex-noise.c skinning.c \
-	texaaline.c texdemo1.c toyball.c trirast.c twoside.c \
-	vert-or-frag-only.c vert-tex.c vsraytrace.c
+	geom-stipple-lines.c geom-wide-lines.c $(gsraytrace_SOURCES) \
+	identity.c linktest.c mandelbrot.c multinoise.c multitex.c \
+	noise.c noise2.c pointcoord.c points.c samplers.c \
+	$(samplers_array_SOURCES) shadow_sampler.c shtest.c \
+	simplex-noise.c skinning.c texaaline.c texdemo1.c toyball.c \
+	trirast.c twoside.c vert-or-frag-only.c vert-tex.c \
+	vsraytrace.c
 DIST_SOURCES = array.c bezier.c bitmap.c blinking-teapot.c brick.c \
 	bump.c convolutions.c deriv.c fragcoord.c fsraytrace.c \
 	geom-outlining-130.c geom-outlining-150.c geom-sprites.c \
-	geom-stipple-lines.c geom-wide-lines.c identity.c linktest.c \
-	mandelbrot.c multinoise.c multitex.c noise.c noise2.c \
-	pointcoord.c points.c samplers.c $(samplers_array_SOURCES) \
-	shadow_sampler.c shtest.c simplex-noise.c skinning.c \
-	texaaline.c texdemo1.c toyball.c trirast.c twoside.c \
-	vert-or-frag-only.c vert-tex.c vsraytrace.c
+	geom-stipple-lines.c geom-wide-lines.c $(gsraytrace_SOURCES) \
+	identity.c linktest.c mandelbrot.c multinoise.c multitex.c \
+	noise.c noise2.c pointcoord.c points.c samplers.c \
+	$(samplers_array_SOURCES) shadow_sampler.c shtest.c \
+	simplex-noise.c skinning.c texaaline.c texdemo1.c toyball.c \
+	trirast.c twoside.c vert-or-frag-only.c vert-tex.c \
+	vsraytrace.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -498,10 +522,16 @@ AM_CFLAGS = \
 	$(GLUT_CFLAGS) \
 	-I$(top_srcdir)/src/util
 
+AM_CXXFLAGS = \
+	$(DEMO_CXXFLAGS) \
+	$(GLUT_CXXFLAGS) \
+	-I$(top_srcdir)/src/util
+
 AM_LDFLAGS = \
 	$(DEMO_LIBS) \
 	$(GLUT_LIBS)
 
+gsraytrace_SOURCES = gsraytrace.cpp
 samplers_array_SOURCES = samplers.c
 samplers_array_CFLAGS = $(AM_CFLAGS) -DSAMPLERS_ARRAY
 array_LDADD = ../util/libutil.la
@@ -517,6 +547,7 @@ geom_outlining_150_LDADD = ../util/libutil.la
 geom_sprites_LDADD = ../util/libutil.la
 geom_stipple_lines_LDADD = ../util/libutil.la
 geom_wide_lines_LDADD = ../util/libutil.la
+gsraytrace_LDADD = ../util/libutil.la
 fsraytrace_LDADD = ../util/libutil.la
 fragcoord_LDADD = ../util/libutil.la
 identity_LDADD = ../util/libutil.la
@@ -564,7 +595,7 @@ EXTRA_DIST = \
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .c .lo .o .obj
+.SUFFIXES: .c .cpp .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -705,6 +736,10 @@ geom-wide-lines$(EXEEXT): $(geom_wide_lines_OBJECTS) $(geom_wide_lines_DEPENDENC
 	@rm -f geom-wide-lines$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(geom_wide_lines_OBJECTS) $(geom_wide_lines_LDADD) $(LIBS)
 
+gsraytrace$(EXEEXT): $(gsraytrace_OBJECTS) $(gsraytrace_DEPENDENCIES) $(EXTRA_gsraytrace_DEPENDENCIES) 
+	@rm -f gsraytrace$(EXEEXT)
+	$(AM_V_CXXLD)$(CXXLINK) $(gsraytrace_OBJECTS) $(gsraytrace_LDADD) $(LIBS)
+
 identity$(EXEEXT): $(identity_OBJECTS) $(identity_DEPENDENCIES) $(EXTRA_identity_DEPENDENCIES) 
 	@rm -f identity$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(identity_OBJECTS) $(identity_LDADD) $(LIBS)
@@ -818,6 +853,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/geom-sprites.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/geom-stipple-lines.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/geom-wide-lines.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsraytrace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/identity.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/linktest.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mandelbrot.Po@am__quote@
@@ -876,6 +912,27 @@ samplers_array-samplers.obj: samplers.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='samplers.c' object='samplers_array-samplers.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(samplers_array_CFLAGS) $(CFLAGS) -c -o samplers_array-samplers.obj `if test -f 'samplers.c'; then $(CYGPATH_W) 'samplers.c'; else $(CYGPATH_W) '$(srcdir)/samplers.c'; fi`
+
+.cpp.o:
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ $<
+
+.cpp.obj:
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+.cpp.lo:
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo

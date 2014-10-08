@@ -184,12 +184,13 @@ host_triplet = @host@
 @HAVE_GLUT_TRUE@	tri-multitex-vbo$(EXEEXT) tri-orig$(EXEEXT) \
 @HAVE_GLUT_TRUE@	tri-point-line-clipped$(EXEEXT) \
 @HAVE_GLUT_TRUE@	tri-query$(EXEEXT) tri-repeat$(EXEEXT) \
-@HAVE_GLUT_TRUE@	tri-scissor-tri$(EXEEXT) tri-square$(EXEEXT) \
-@HAVE_GLUT_TRUE@	tri-stencil$(EXEEXT) tri-stipple$(EXEEXT) \
-@HAVE_GLUT_TRUE@	tristrip$(EXEEXT) tristrip-clip$(EXEEXT) \
-@HAVE_GLUT_TRUE@	tristrip-flat$(EXEEXT) tri-tex-1d$(EXEEXT) \
-@HAVE_GLUT_TRUE@	tri-tex-3d$(EXEEXT) tri-tex$(EXEEXT) \
-@HAVE_GLUT_TRUE@	tri-tri$(EXEEXT) tri-unfilled$(EXEEXT) \
+@HAVE_GLUT_TRUE@	tri-rotate$(EXEEXT) tri-scissor-tri$(EXEEXT) \
+@HAVE_GLUT_TRUE@	tri-square$(EXEEXT) tri-stencil$(EXEEXT) \
+@HAVE_GLUT_TRUE@	tri-stipple$(EXEEXT) tristrip$(EXEEXT) \
+@HAVE_GLUT_TRUE@	tristrip-clip$(EXEEXT) tristrip-flat$(EXEEXT) \
+@HAVE_GLUT_TRUE@	tri-tex-1d$(EXEEXT) tri-tex-3d$(EXEEXT) \
+@HAVE_GLUT_TRUE@	tri-tex$(EXEEXT) tri-tri$(EXEEXT) \
+@HAVE_GLUT_TRUE@	tri-unfilled$(EXEEXT) \
 @HAVE_GLUT_TRUE@	tri-unfilled-clip$(EXEEXT) \
 @HAVE_GLUT_TRUE@	tri-unfilled-edgeflag$(EXEEXT) \
 @HAVE_GLUT_TRUE@	tri-unfilled-fog$(EXEEXT) \
@@ -599,6 +600,9 @@ tri_query_LDADD = $(LDADD)
 tri_repeat_SOURCES = tri-repeat.c
 tri_repeat_OBJECTS = tri-repeat.$(OBJEXT)
 tri_repeat_LDADD = $(LDADD)
+tri_rotate_SOURCES = tri-rotate.c
+tri_rotate_OBJECTS = tri-rotate.$(OBJEXT)
+tri_rotate_LDADD = $(LDADD)
 tri_scissor_tri_SOURCES = tri-scissor-tri.c
 tri_scissor_tri_OBJECTS = tri-scissor-tri.$(OBJEXT)
 tri_scissor_tri_LDADD = $(LDADD)
@@ -826,10 +830,10 @@ SOURCES = clear-color.c clear-fbo.c clear-fbo-scissor.c \
 	tri-fp.c tri-fp-const-imm.c tri-lit.c tri-lit-material.c \
 	tri-logicop-none.c tri-logicop-xor.c tri-mask-tri.c \
 	tri-multitex-vbo.c tri-orig.c tri-point-line-clipped.c \
-	tri-query.c tri-repeat.c tri-scissor-tri.c tri-square.c \
-	tri-stencil.c tri-stipple.c tri-tex.c tri-tex-1d.c \
-	tri-tex-3d.c tri-tri.c tri-unfilled.c tri-unfilled-clip.c \
-	tri-unfilled-edgeflag.c tri-unfilled-fog.c \
+	tri-query.c tri-repeat.c tri-rotate.c tri-scissor-tri.c \
+	tri-square.c tri-stencil.c tri-stipple.c tri-tex.c \
+	tri-tex-1d.c tri-tex-3d.c tri-tri.c tri-unfilled.c \
+	tri-unfilled-clip.c tri-unfilled-edgeflag.c tri-unfilled-fog.c \
 	tri-unfilled-point.c tri-unfilled-smooth.c tri-unfilled-tri.c \
 	tri-unfilled-tri-lit.c tri-unfilled-userclip.c \
 	tri-unfilled-userclip-stip.c tri-userclip.c tri-viewport.c \
@@ -876,10 +880,10 @@ DIST_SOURCES = clear-color.c clear-fbo.c clear-fbo-scissor.c \
 	tri-fp.c tri-fp-const-imm.c tri-lit.c tri-lit-material.c \
 	tri-logicop-none.c tri-logicop-xor.c tri-mask-tri.c \
 	tri-multitex-vbo.c tri-orig.c tri-point-line-clipped.c \
-	tri-query.c tri-repeat.c tri-scissor-tri.c tri-square.c \
-	tri-stencil.c tri-stipple.c tri-tex.c tri-tex-1d.c \
-	tri-tex-3d.c tri-tri.c tri-unfilled.c tri-unfilled-clip.c \
-	tri-unfilled-edgeflag.c tri-unfilled-fog.c \
+	tri-query.c tri-repeat.c tri-rotate.c tri-scissor-tri.c \
+	tri-square.c tri-stencil.c tri-stipple.c tri-tex.c \
+	tri-tex-1d.c tri-tex-3d.c tri-tri.c tri-unfilled.c \
+	tri-unfilled-clip.c tri-unfilled-edgeflag.c tri-unfilled-fog.c \
 	tri-unfilled-point.c tri-unfilled-smooth.c tri-unfilled-tri.c \
 	tri-unfilled-tri-lit.c tri-unfilled-userclip.c \
 	tri-unfilled-userclip-stip.c tri-userclip.c tri-viewport.c \
@@ -1653,6 +1657,10 @@ tri-repeat$(EXEEXT): $(tri_repeat_OBJECTS) $(tri_repeat_DEPENDENCIES) $(EXTRA_tr
 	@rm -f tri-repeat$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(tri_repeat_OBJECTS) $(tri_repeat_LDADD) $(LIBS)
 
+tri-rotate$(EXEEXT): $(tri_rotate_OBJECTS) $(tri_rotate_DEPENDENCIES) $(EXTRA_tri_rotate_DEPENDENCIES) 
+	@rm -f tri-rotate$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(tri_rotate_OBJECTS) $(tri_rotate_LDADD) $(LIBS)
+
 tri-scissor-tri$(EXEEXT): $(tri_scissor_tri_OBJECTS) $(tri_scissor_tri_DEPENDENCIES) $(EXTRA_tri_scissor_tri_DEPENDENCIES) 
 	@rm -f tri-scissor-tri$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(tri_scissor_tri_OBJECTS) $(tri_scissor_tri_LDADD) $(LIBS)
@@ -1988,6 +1996,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tri-point-line-clipped.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tri-query.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tri-repeat.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tri-rotate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tri-scissor-tri.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tri-square.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tri-stencil.Po@am__quote@

@@ -135,10 +135,10 @@ host_triplet = @host@
 @HAVE_GLUT_TRUE@	teapots$(EXEEXT) tess$(EXEEXT) \
 @HAVE_GLUT_TRUE@	tesswind$(EXEEXT) texbind$(EXEEXT) \
 @HAVE_GLUT_TRUE@	texgen$(EXEEXT) texprox$(EXEEXT) \
-@HAVE_GLUT_TRUE@	texsub$(EXEEXT) texturesurf$(EXEEXT) \
-@HAVE_GLUT_TRUE@	torus$(EXEEXT) trim$(EXEEXT) \
-@HAVE_GLUT_TRUE@	unproject$(EXEEXT) varray$(EXEEXT) \
-@HAVE_GLUT_TRUE@	wrap$(EXEEXT)
+@HAVE_GLUT_TRUE@	texsub$(EXEEXT) texture3d$(EXEEXT) \
+@HAVE_GLUT_TRUE@	texturesurf$(EXEEXT) torus$(EXEEXT) \
+@HAVE_GLUT_TRUE@	trim$(EXEEXT) unproject$(EXEEXT) \
+@HAVE_GLUT_TRUE@	varray$(EXEEXT) wrap$(EXEEXT)
 subdir = src/redbook
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp README
@@ -364,6 +364,9 @@ texprox_LDADD = $(LDADD)
 texsub_SOURCES = texsub.c
 texsub_OBJECTS = texsub.$(OBJEXT)
 texsub_LDADD = $(LDADD)
+texture3d_SOURCES = texture3d.c
+texture3d_OBJECTS = texture3d.$(OBJEXT)
+texture3d_LDADD = $(LDADD)
 texturesurf_SOURCES = texturesurf.c
 texturesurf_OBJECTS = texturesurf.$(OBJEXT)
 texturesurf_LDADD = $(LDADD)
@@ -427,8 +430,8 @@ SOURCES = aaindex.c aapoly.c aargb.c accanti.c accpersp.c alpha.c \
 	quadric.c robot.c sccolorlight.c scene.c scenebamb.c \
 	sceneflat.c select.c shadowmap.c smooth.c stencil.c stroke.c \
 	surface.c surfpoints.c teaambient.c teapots.c tess.c \
-	tesswind.c texbind.c texgen.c texprox.c texsub.c texturesurf.c \
-	torus.c trim.c unproject.c varray.c wrap.c
+	tesswind.c texbind.c texgen.c texprox.c texsub.c texture3d.c \
+	texturesurf.c torus.c trim.c unproject.c varray.c wrap.c
 DIST_SOURCES = aaindex.c aapoly.c aargb.c accanti.c accpersp.c alpha.c \
 	alpha3D.c anti.c bezcurve.c bezmesh.c checker.c clip.c \
 	colormat.c combiner.c convolution.c cube.c cubemap.c \
@@ -440,8 +443,8 @@ DIST_SOURCES = aaindex.c aapoly.c aargb.c accanti.c accpersp.c alpha.c \
 	quadric.c robot.c sccolorlight.c scene.c scenebamb.c \
 	sceneflat.c select.c shadowmap.c smooth.c stencil.c stroke.c \
 	surface.c surfpoints.c teaambient.c teapots.c tess.c \
-	tesswind.c texbind.c texgen.c texprox.c texsub.c texturesurf.c \
-	torus.c trim.c unproject.c varray.c wrap.c
+	tesswind.c texbind.c texgen.c texprox.c texsub.c texture3d.c \
+	texturesurf.c torus.c trim.c unproject.c varray.c wrap.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -956,6 +959,10 @@ texsub$(EXEEXT): $(texsub_OBJECTS) $(texsub_DEPENDENCIES) $(EXTRA_texsub_DEPENDE
 	@rm -f texsub$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(texsub_OBJECTS) $(texsub_LDADD) $(LIBS)
 
+texture3d$(EXEEXT): $(texture3d_OBJECTS) $(texture3d_DEPENDENCIES) $(EXTRA_texture3d_DEPENDENCIES) 
+	@rm -f texture3d$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(texture3d_OBJECTS) $(texture3d_LDADD) $(LIBS)
+
 texturesurf$(EXEEXT): $(texturesurf_OBJECTS) $(texturesurf_DEPENDENCIES) $(EXTRA_texturesurf_DEPENDENCIES) 
 	@rm -f texturesurf$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(texturesurf_OBJECTS) $(texturesurf_LDADD) $(LIBS)
@@ -1055,6 +1062,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texgen.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texprox.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texsub.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texture3d.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/texturesurf.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/torus.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/trim.Po@am__quote@

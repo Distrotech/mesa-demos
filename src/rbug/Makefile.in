@@ -102,13 +102,17 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@HAVE_MESA_SOURCE_TRUE@noinst_PROGRAMS = bin_to_bmp$(EXEEXT) \
-@HAVE_MESA_SOURCE_TRUE@	simple_client$(EXEEXT) \
-@HAVE_MESA_SOURCE_TRUE@	simple_server$(EXEEXT) \
-@HAVE_MESA_SOURCE_TRUE@	shdr_info$(EXEEXT) shdr_dump$(EXEEXT) \
-@HAVE_MESA_SOURCE_TRUE@	shdr_disable$(EXEEXT) ctx_info$(EXEEXT) \
-@HAVE_MESA_SOURCE_TRUE@	ctx_rule$(EXEEXT) tex_info$(EXEEXT) \
-@HAVE_MESA_SOURCE_TRUE@	tex_dump$(EXEEXT)
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@noinst_PROGRAMS =  \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	bin_to_bmp$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	simple_client$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	simple_server$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	shdr_info$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	shdr_dump$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	shdr_disable$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	ctx_info$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	ctx_rule$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	tex_info$(EXEEXT) \
+@HAVE_MESA_SOURCE_TRUE@@HAVE_RBUG_TRUE@	tex_dump$(EXEEXT)
 subdir = src/rbug
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp README

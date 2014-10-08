@@ -113,11 +113,11 @@ host_triplet = @host@
 @HAVE_GLUT_TRUE@	arbvparray$(EXEEXT) arbvptest1$(EXEEXT) \
 @HAVE_GLUT_TRUE@	arbvptest3$(EXEEXT) arbvptorus$(EXEEXT) \
 @HAVE_GLUT_TRUE@	arbvpwarpmesh$(EXEEXT) arraytexture$(EXEEXT) \
-@HAVE_GLUT_TRUE@	auxbuffer$(EXEEXT) blendxor$(EXEEXT) \
-@HAVE_GLUT_TRUE@	blitfb$(EXEEXT) bufferobj$(EXEEXT) \
-@HAVE_GLUT_TRUE@	bumpmap$(EXEEXT) bug_3050$(EXEEXT) \
-@HAVE_GLUT_TRUE@	bug_3101$(EXEEXT) bug_3195$(EXEEXT) \
-@HAVE_GLUT_TRUE@	bug_texstore_i8$(EXEEXT) \
+@HAVE_GLUT_TRUE@	auxbuffer$(EXEEXT) backspecular$(EXEEXT) \
+@HAVE_GLUT_TRUE@	blendxor$(EXEEXT) blitfb$(EXEEXT) \
+@HAVE_GLUT_TRUE@	bufferobj$(EXEEXT) bumpmap$(EXEEXT) \
+@HAVE_GLUT_TRUE@	bug_3050$(EXEEXT) bug_3101$(EXEEXT) \
+@HAVE_GLUT_TRUE@	bug_3195$(EXEEXT) bug_texstore_i8$(EXEEXT) \
 @HAVE_GLUT_TRUE@	calibrate_rast$(EXEEXT) clip$(EXEEXT) \
 @HAVE_GLUT_TRUE@	condrender$(EXEEXT) copypixrate$(EXEEXT) \
 @HAVE_GLUT_TRUE@	cva$(EXEEXT) cva_huge$(EXEEXT) \
@@ -231,6 +231,9 @@ arraytexture_DEPENDENCIES = ../util/libutil.la
 auxbuffer_SOURCES = auxbuffer.c
 auxbuffer_OBJECTS = auxbuffer.$(OBJEXT)
 auxbuffer_DEPENDENCIES =
+backspecular_SOURCES = backspecular.c
+backspecular_OBJECTS = backspecular.$(OBJEXT)
+backspecular_LDADD = $(LDADD)
 blendxor_SOURCES = blendxor.c
 blendxor_OBJECTS = blendxor.$(OBJEXT)
 blendxor_LDADD = $(LDADD)
@@ -567,39 +570,14 @@ SOURCES = afsmultiarb.c antialias.c arbfpspec.c arbfptest1.c \
 	arbfptexture.c arbfptrig.c arbgpuprog.c arbnpot.c \
 	arbnpot-mipmap.c arbvparray.c arbvptest1.c arbvptest3.c \
 	arbvptorus.c arbvpwarpmesh.c arraytexture.c auxbuffer.c \
-	blendxor.c blitfb.c bufferobj.c bug_3050.c bug_3101.c \
-	bug_3195.c bug_texstore_i8.c bumpmap.c calibrate_rast.c clip.c \
-	condrender.c copypixrate.c cva.c cva_huge.c cylwrap.c \
-	drawbuffers.c drawbuffers2.c drawstencil.c exactrast.c \
-	ext422square.c fbotest1.c fbotest2.c fbotest3.c fillrate.c \
-	floattex.c fogcoord.c fptest1.c fptexture.c \
-	$(getprocaddress_SOURCES) $(nodist_getprocaddress_SOURCES) \
-	getteximage.c glutfx.c interleave.c invert.c jkrahntest.c \
-	lineclip.c linehacks.c manytex.c mapbufrange.c minmag.c \
-	mipgen.c mipmap_comp.c mipmap_comp_tests.c mipmap_limits.c \
-	mipmap_tunnel.c mipmap_view.c multipal.c multitexarray.c \
-	multiwindow.c no_s3tc.c packedpixels.c pbo.c persp_hint.c \
-	prim.c prog_parameter.c quads.c random.c readrate.c \
-	rubberband.c scissor.c scissor-viewport.c seccolor.c \
-	shader-interp.c shader_api.c shadow-sample.c sharedtex.c \
-	stencilreaddraw.c stencilwrap.c step.c streaming_rect.c \
-	subtex.c subtexrate.c tex1d.c texcmp.c texcompress2.c \
-	texcompsub.c texdown.c texfilt.c texgenmix.c texleak.c \
-	texline.c texobj.c texobjshare.c texrect.c unfilledclip.c \
-	viewmemory.c vparray.c vpeval.c vptest1.c vptest2.c vptest3.c \
-	vptorus.c vpwarpmesh.c yuvrect.c yuvsquare.c zbitmap.c zcomp.c \
-	zdrawpix.c zreaddraw.c
-DIST_SOURCES = afsmultiarb.c antialias.c arbfpspec.c arbfptest1.c \
-	arbfptexture.c arbfptrig.c arbgpuprog.c arbnpot.c \
-	arbnpot-mipmap.c arbvparray.c arbvptest1.c arbvptest3.c \
-	arbvptorus.c arbvpwarpmesh.c arraytexture.c auxbuffer.c \
-	blendxor.c blitfb.c bufferobj.c bug_3050.c bug_3101.c \
-	bug_3195.c bug_texstore_i8.c bumpmap.c calibrate_rast.c clip.c \
-	condrender.c copypixrate.c cva.c cva_huge.c cylwrap.c \
-	drawbuffers.c drawbuffers2.c drawstencil.c exactrast.c \
-	ext422square.c fbotest1.c fbotest2.c fbotest3.c fillrate.c \
-	floattex.c fogcoord.c fptest1.c fptexture.c \
-	$(am__getprocaddress_SOURCES_DIST) getteximage.c glutfx.c \
+	backspecular.c blendxor.c blitfb.c bufferobj.c bug_3050.c \
+	bug_3101.c bug_3195.c bug_texstore_i8.c bumpmap.c \
+	calibrate_rast.c clip.c condrender.c copypixrate.c cva.c \
+	cva_huge.c cylwrap.c drawbuffers.c drawbuffers2.c \
+	drawstencil.c exactrast.c ext422square.c fbotest1.c fbotest2.c \
+	fbotest3.c fillrate.c floattex.c fogcoord.c fptest1.c \
+	fptexture.c $(getprocaddress_SOURCES) \
+	$(nodist_getprocaddress_SOURCES) getteximage.c glutfx.c \
 	interleave.c invert.c jkrahntest.c lineclip.c linehacks.c \
 	manytex.c mapbufrange.c minmag.c mipgen.c mipmap_comp.c \
 	mipmap_comp_tests.c mipmap_limits.c mipmap_tunnel.c \
@@ -614,6 +592,32 @@ DIST_SOURCES = afsmultiarb.c antialias.c arbfpspec.c arbfptest1.c \
 	texobjshare.c texrect.c unfilledclip.c viewmemory.c vparray.c \
 	vpeval.c vptest1.c vptest2.c vptest3.c vptorus.c vpwarpmesh.c \
 	yuvrect.c yuvsquare.c zbitmap.c zcomp.c zdrawpix.c zreaddraw.c
+DIST_SOURCES = afsmultiarb.c antialias.c arbfpspec.c arbfptest1.c \
+	arbfptexture.c arbfptrig.c arbgpuprog.c arbnpot.c \
+	arbnpot-mipmap.c arbvparray.c arbvptest1.c arbvptest3.c \
+	arbvptorus.c arbvpwarpmesh.c arraytexture.c auxbuffer.c \
+	backspecular.c blendxor.c blitfb.c bufferobj.c bug_3050.c \
+	bug_3101.c bug_3195.c bug_texstore_i8.c bumpmap.c \
+	calibrate_rast.c clip.c condrender.c copypixrate.c cva.c \
+	cva_huge.c cylwrap.c drawbuffers.c drawbuffers2.c \
+	drawstencil.c exactrast.c ext422square.c fbotest1.c fbotest2.c \
+	fbotest3.c fillrate.c floattex.c fogcoord.c fptest1.c \
+	fptexture.c $(am__getprocaddress_SOURCES_DIST) getteximage.c \
+	glutfx.c interleave.c invert.c jkrahntest.c lineclip.c \
+	linehacks.c manytex.c mapbufrange.c minmag.c mipgen.c \
+	mipmap_comp.c mipmap_comp_tests.c mipmap_limits.c \
+	mipmap_tunnel.c mipmap_view.c multipal.c multitexarray.c \
+	multiwindow.c no_s3tc.c packedpixels.c pbo.c persp_hint.c \
+	prim.c prog_parameter.c quads.c random.c readrate.c \
+	rubberband.c scissor.c scissor-viewport.c seccolor.c \
+	shader-interp.c shader_api.c shadow-sample.c sharedtex.c \
+	stencilreaddraw.c stencilwrap.c step.c streaming_rect.c \
+	subtex.c subtexrate.c tex1d.c texcmp.c texcompress2.c \
+	texcompsub.c texdown.c texfilt.c texgenmix.c texleak.c \
+	texline.c texobj.c texobjshare.c texrect.c unfilledclip.c \
+	viewmemory.c vparray.c vpeval.c vptest1.c vptest2.c vptest3.c \
+	vptorus.c vpwarpmesh.c yuvrect.c yuvsquare.c zbitmap.c zcomp.c \
+	zdrawpix.c zreaddraw.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -944,6 +948,10 @@ arraytexture$(EXEEXT): $(arraytexture_OBJECTS) $(arraytexture_DEPENDENCIES) $(EX
 auxbuffer$(EXEEXT): $(auxbuffer_OBJECTS) $(auxbuffer_DEPENDENCIES) $(EXTRA_auxbuffer_DEPENDENCIES) 
 	@rm -f auxbuffer$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(auxbuffer_OBJECTS) $(auxbuffer_LDADD) $(LIBS)
+
+backspecular$(EXEEXT): $(backspecular_OBJECTS) $(backspecular_DEPENDENCIES) $(EXTRA_backspecular_DEPENDENCIES) 
+	@rm -f backspecular$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(backspecular_OBJECTS) $(backspecular_LDADD) $(LIBS)
 
 blendxor$(EXEEXT): $(blendxor_OBJECTS) $(blendxor_DEPENDENCIES) $(EXTRA_blendxor_DEPENDENCIES) 
 	@rm -f blendxor$(EXEEXT)
@@ -1359,6 +1367,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arbvpwarpmesh.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arraytexture.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/auxbuffer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/backspecular.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/blendxor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/blitfb.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/bufferobj.Po@am__quote@
@@ -1693,7 +1702,7 @@ uninstall-am:
 
 
 @HAVE_MESA_SOURCE_TRUE@getproclist.h: $(MESA_GLAPI)/gl_API.xml getprocaddress.c getprocaddress.py
-@HAVE_MESA_SOURCE_TRUE@	python getprocaddress.py > getproclist.h
+@HAVE_MESA_SOURCE_TRUE@	python getprocaddress.py $(MESA_GLAPI) > getproclist.h
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

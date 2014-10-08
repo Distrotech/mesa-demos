@@ -167,8 +167,8 @@ glxgears_pixmap_LDADD = $(LDADD)
 glxheads_SOURCES = glxheads.c
 glxheads_OBJECTS = glxheads.$(OBJEXT)
 glxheads_LDADD = $(LDADD)
-glxinfo_SOURCES = glxinfo.c
-glxinfo_OBJECTS = glxinfo.$(OBJEXT)
+am_glxinfo_OBJECTS = glxinfo.$(OBJEXT) glinfo_common.$(OBJEXT)
+glxinfo_OBJECTS = $(am_glxinfo_OBJECTS)
 glxinfo_LDADD = $(LDADD)
 glxpbdemo_SOURCES = glxpbdemo.c
 glxpbdemo_OBJECTS = glxpbdemo.$(OBJEXT)
@@ -257,18 +257,20 @@ am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libpbutil_la_SOURCES) $(corender_SOURCES) glsync.c \
 	glthreads.c glxcontexts.c glxdemo.c glxgears.c \
-	glxgears_fbconfig.c glxgears_pixmap.c glxheads.c glxinfo.c \
-	glxpbdemo.c glxpixmap.c glxsnoop.c glxswapcontrol.c manywin.c \
-	multictx.c offset.c overlay.c pbdemo.c pbinfo.c shape.c \
-	sharedtex.c sharedtex_mt.c texture_from_pixmap.c wincopy.c \
-	xfont.c $(xrotfontdemo_SOURCES)
+	glxgears_fbconfig.c glxgears_pixmap.c glxheads.c \
+	$(glxinfo_SOURCES) glxpbdemo.c glxpixmap.c glxsnoop.c \
+	glxswapcontrol.c manywin.c multictx.c offset.c overlay.c \
+	pbdemo.c pbinfo.c shape.c sharedtex.c sharedtex_mt.c \
+	texture_from_pixmap.c wincopy.c xfont.c \
+	$(xrotfontdemo_SOURCES)
 DIST_SOURCES = $(libpbutil_la_SOURCES) $(corender_SOURCES) glsync.c \
 	glthreads.c glxcontexts.c glxdemo.c glxgears.c \
-	glxgears_fbconfig.c glxgears_pixmap.c glxheads.c glxinfo.c \
-	glxpbdemo.c glxpixmap.c glxsnoop.c glxswapcontrol.c manywin.c \
-	multictx.c offset.c overlay.c pbdemo.c pbinfo.c shape.c \
-	sharedtex.c sharedtex_mt.c texture_from_pixmap.c wincopy.c \
-	xfont.c $(xrotfontdemo_SOURCES)
+	glxgears_fbconfig.c glxgears_pixmap.c glxheads.c \
+	$(glxinfo_SOURCES) glxpbdemo.c glxpixmap.c glxsnoop.c \
+	glxswapcontrol.c manywin.c multictx.c offset.c overlay.c \
+	pbdemo.c pbinfo.c shape.c sharedtex.c sharedtex_mt.c \
+	texture_from_pixmap.c wincopy.c xfont.c \
+	$(xrotfontdemo_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -473,6 +475,11 @@ xrotfontdemo_SOURCES = \
 	xrotfontdemo.c \
 	xuserotfont.c \
 	xuserotfont.h
+
+glxinfo_SOURCES = \
+	glxinfo.c \
+	glinfo_common.c \
+	glinfo_common.h
 
 glthreads_LDADD = -lpthread
 glxgears_fbconfig_LDADD = libpbutil.la
@@ -696,6 +703,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/corender.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glinfo_common.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glsync.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glthreads.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glxcontexts.Po@am__quote@
